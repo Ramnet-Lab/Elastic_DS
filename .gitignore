@@ -62,5 +62,11 @@ venv.bak/
 *.swo
 
 # Project specific
-processed_data/
 search_results/
+
+# Large data files
+example_output/raw_data.csv
+kg_output/raw_data.csv
+processed_data/cleaned_data.csv
+processed_data/normalized_data.csv
+zeek_data/combined_conn_logs.csv
