@@ -1,0 +1,64 @@
+server_uri: neo4j://192.168.2.2:7687
+admin_user: None
+admin_pass: None
+database: neo4j
+basepath: ./
+
+pre_ingest:
+  - CREATE CONSTRAINT logentry_index IF NOT EXISTS FOR (n:LogEntry) REQUIRE n.index IS UNIQUE;
+  - CREATE CONSTRAINT agent_agentversion IF NOT EXISTS FOR (n:Agent) REQUIRE n.agentVersion IS UNIQUE;
+  - CREATE CONSTRAINT host_hostmac IF NOT EXISTS FOR (n:Host) REQUIRE n.hostMac IS UNIQUE;
+  - CREATE CONSTRAINT logfile_logfileinode IF NOT EXISTS FOR (n:LogFile) REQUIRE n.logFileInode IS UNIQUE;
+files:
+- chunk_size: 100
+  cql: |-
+    WITH $dict.rows AS rows
+    UNWIND rows AS row
+    MERGE (n:LogEntry {index: row.`_index`})
+    SET n.timestamp = row.`@timestamp`, n.message = row.message, n.logOffset = toIntegerOrNull(row.log_offset)
+  url: $BASE//Users/bg/Desktop/Elastic_ds/example_output/kg_outputclean_data.csv
+- chunk_size: 100
+  cql: |-
+    WITH $dict.rows AS rows
+    UNWIND rows AS row
+    MERGE (n:Agent {agentVersion: row.agent_version})
+    SET n.agentEphemeralId = row.agent_ephemeral_id, n.agentId = row.agent_id, n.agentName = row.agent_name, n.agentType = row.agent_type
+  url: $BASE//Users/bg/Desktop/Elastic_ds/example_output/kg_outputclean_data.csv
+- chunk_size: 100
+  cql: |-
+    WITH $dict.rows AS rows
+    UNWIND rows AS row
+    MERGE (n:Host {hostMac: row.host_mac})
+    SET n.hostHostname = row.host_hostname, n.hostArchitecture = row.host_architecture, n.hostName = row.host_name, n.hostId = row.host_id, n.hostIp = row.host_ip, n.hostOsFamily = row.host_os_family, n.hostOsName = row.host_os_name, n.hostOsKernel = row.host_os_kernel, n.hostOsCodename = row.host_os_codename, n.hostOsType = row.host_os_type, n.hostOsPlatform = row.host_os_platform, n.hostOsVersion = row.host_os_version
+  url: $BASE//Users/bg/Desktop/Elastic_ds/example_output/kg_outputclean_data.csv
+- chunk_size: 100
+  cql: |-
+    WITH $dict.rows AS rows
+    UNWIND rows AS row
+    MERGE (n:LogFile {logFileInode: row.log_file_inode})
+    SET n.logFilePath = row.log_file_path
+  url: $BASE//Users/bg/Desktop/Elastic_ds/example_output/kg_outputclean_data.csv
+- chunk_size: 100
+  cql: |
+    WITH $dict.rows AS rows
+    UNWIND rows as row
+    MATCH (source:LogEntry {index: row.`_index`})
+    MATCH (target:Agent {agentVersion: row.agent_version})
+    MERGE (source)-[n:LOGGED_BY]->(target)
+  url: $BASE//Users/bg/Desktop/Elastic_ds/example_output/kg_outputclean_data.csv
+- chunk_size: 100
+  cql: |
+    WITH $dict.rows AS rows
+    UNWIND rows as row
+    MATCH (source:LogEntry {index: row.`_index`})
+    MATCH (target:Host {hostMac: row.host_mac})
+    MERGE (source)-[n:RECORDED_ON]->(target)
+  url: $BASE//Users/bg/Desktop/Elastic_ds/example_output/kg_outputclean_data.csv
+- chunk_size: 100
+  cql: |
+    WITH $dict.rows AS rows
+    UNWIND rows as row
+    MATCH (source:LogEntry {index: row.`_index`})
+    MATCH (target:LogFile {logFileInode: row.log_file_inode})
+    MERGE (source)-[n:STORED_IN]->(target)
+  url: $BASE//Users/bg/Desktop/Elastic_ds/example_output/kg_outputclean_data.csv

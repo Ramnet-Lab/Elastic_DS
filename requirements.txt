@@ -1,0 +1,9 @@
+elasticsearch>=7.0.0
+pandas>=1.0.0
+numpy>=1.18.0
+matplotlib>=3.1.0
+networkx>=2.4
+sentence-transformers>=2.0.0
+tqdm>=4.45.0
+pyyaml>=5.1
+openai>=1.0.0
