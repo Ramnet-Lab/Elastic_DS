@@ -723,8 +723,8 @@ This will:
 
 - Limited support for real-time streaming data
 - Neo4j ingestion can be memory-intensive for very large datasets
-- LLM-assisted modeling requires an OpenAI API key and incurs usage costs
-- Semantic search accuracy depends on the quality and relevance of the embedding model
+- LLM-assisted modeling requires an OpenAI API key and may incur usage costs. It can also be run with local LLMs, though with the typical limitations therein.
+- Semantic search accuracy depends on the quality and relevance of the embedding model, which is also dependent on hardware resources.
 - The pipeline is designed for batch processing rather than real-time analysis
 - Knowledge graph visualization requires additional tools for interactive exploration
 
