@@ -503,6 +503,20 @@ def compute_cosine_similarity(query_embedding, embeddings):
     return cosine_similarities
 ```
 
+#### Semantic Search Example
+
+![Semantic Search Demo](example_images/semantic.gif)
+
+The GIF above demonstrates the semantic search capability of the Elastic Data Science Pipeline. This feature allows security analysts to:
+
+- **Search for Conceptually Related Terms**: The example shows a search for anything related to "login", "failure", or "error" events
+- **Natural Language Understanding**: Unlike traditional keyword search, semantic search understands the meaning behind queries
+- **Context-Aware Results**: Returns results that are conceptually similar even when they don't contain the exact search terms
+- **Relevance Ranking**: Results are automatically ranked by semantic similarity to the query
+- **Immediate Insights**: Quickly identifies security events of interest without requiring exact query syntax
+
+This semantic search capability significantly reduces the time needed to find relevant security events in large datasets, enabling faster incident response and more effective threat hunting.
+
 ## Configuration
 
 The pipeline can be configured using a JSON configuration file:
