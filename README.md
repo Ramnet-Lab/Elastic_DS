@@ -1,3 +1,5 @@
+![Elastic Data Science Pipeline](example_images/splashimg.webp)
+
 # Elastic Data Science Pipeline
 
 A comprehensive security log analysis solution that transforms raw security data into actionable intelligence through data acquisition, processing, knowledge graph modeling, and semantic search capabilities.
