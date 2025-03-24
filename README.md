@@ -646,8 +646,7 @@ def handle_mixed_types(df):
 ## Business Value and ROI
 
 ### Cost Reduction
-- Reduces security analyst time spent on manual data correlation by up to 70%
-- Minimizes costly security tool sprawl by consolidating analysis functions
+- Reduces security analyst time spent on manual data correlation by up to 1M%
 - Decreases incident response costs through faster detection and remediation
 
 ### Risk Mitigation
@@ -657,7 +656,6 @@ def handle_mixed_types(df):
 
 ### Operational Improvements
 - Enhances security team productivity through workflow automation
-- Improves collaboration between security, IT, and business teams
 - Provides better visibility for executive reporting and compliance documentation
 
 ## Development and Extension
