@@ -707,9 +707,21 @@ def acquire_data(config):
 2. Update the `perform_semantic_search` function to use the new capabilities
 3. Add configuration options to support the new features
 
-## Converting Existing Notebooks
+## Original Jupyter Notebooks and Conversion
 
-The `convert_notebook.py` script demonstrates how to convert original notebooks to use the new pipeline:
+The repository includes the original Jupyter Notebooks in the `JNB` directory:
+
+- **ELS_pull.ipynb**: Data acquisition from Elasticsearch
+- **ELS_norm.ipynb**: Data normalization and processing
+- **Sematic_search.ipynb**: Semantic search implementation
+- **ELS_KG_push.ipynb**: Knowledge graph creation and Neo4j integration
+- **fetch_csv_api.ipynb**: API-based data acquisition
+
+These notebooks provide the original implementation that has been refactored into the modular pipeline architecture. They can be useful for understanding the individual components or for educational purposes.
+
+### Converting Notebooks to Pipeline
+
+The `convert_notebook.py` script demonstrates how to convert these original notebooks to use the new pipeline:
 
 ```bash
 python convert_notebook.py
@@ -720,6 +732,8 @@ This will:
 2. Normalize the data (ELS_norm.ipynb)
 3. Perform semantic search (Sematic_search.ipynb)
 4. Create a knowledge graph (ELS_KG_push.ipynb)
+
+The pipeline architecture provides a more maintainable and extensible approach compared to the notebook-based workflow, while preserving all the functionality of the original notebooks.
 
 ## Known Limitations
 
